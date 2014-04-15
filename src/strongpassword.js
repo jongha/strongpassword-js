@@ -1,12 +1,12 @@
-"use strict"
-
-function strong_password(size) {
+var strong_password = function(size) {
+    size = size || 15;
+    
     var MAX_SEED = 100;
     var i, result = [], visit = [], map = [
         "abcdefghijklmnopqrstuvwxyz",
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "0123456789",
-        "`!\?$?%^&*()_-+={[",
+        "`!?$?%^&*()_-+={[",
         "}]:;@'~#|\\<>.?/];"
         ];
 
@@ -29,4 +29,4 @@ function strong_password(size) {
     }
 
     return result.join("");
-}
+};
