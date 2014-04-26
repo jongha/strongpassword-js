@@ -34,7 +34,7 @@ var passwd = strong_password(); // output is ";[1rS2}l`Pb4F?~"
 ```
 
 ```
-var passwd = strong_password(20); // output is ""8aD?&Pf|!0l7)I/2_Cw>""
+var passwd = strong_password(20); // output is "8aD?&Pf|!0l7)I/2_Cw>"
 ```
 
 # License
