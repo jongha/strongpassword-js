@@ -28,6 +28,6 @@
     "strictEqual",
     "notStrictEqual",
     "throws",
-    "strong_password"
+    "strongpassword"
   ]
 }

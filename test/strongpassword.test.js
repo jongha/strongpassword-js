@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 
     var map = [
         "abcdefghijklmnopqrstuvwxyz",
@@ -34,8 +34,8 @@
         test("Strong Password (length: " + size + ")", function() {
             size = size || 15;
             
-            var password1 = strong_password(size);
-            var password2 = strong_password(size);
+            var password1 = strongpassword.getpasswords(size);
+            var password2 = strongpassword.getpasswords(size);
             
             equal(password1.length, size, "Default length " + size + " check");
             equal(password2.length, size, "Default length " + size + " check");
