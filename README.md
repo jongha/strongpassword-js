@@ -29,12 +29,43 @@ Include strongpassword.min.js script file in your html page.
 
 ## Sample
 
+### Generate safe password
+
+generate safe password
+
+#### Parameters
+
+* size: generated password size
+
 ```
-var passwd = strongpassword.getpasswords(); // output is ";[1rS2}l`Pb4F?~"
+var passwd = strongpassword.get(); // sample output is ";[1rS2}l`Pb4F?~"
 ```
 
 ```
-var passwd = strongpassword.getpasswords(20); // output is "8aD?&Pf|!0l7)I/2_Cw>"
+var passwd = strongpassword.get(20); // sample output is "8aD?&Pf|!0l7)I/2_Cw>"
+```
+
+### Valicate safe password
+
+Return the validation result password is safe.
+
+#### Parameters
+
+* password: password for valication
+* threshold: min-length for safe password (default: 10)
+
+```
+var safe = strongpassword.issafe("8aD?&Pf|!0l7)I/2_Cw>"); // safe: true
+```
+
+#### Usage min-length threshold parameter
+
+```
+var safe = strongpassword.issafe("8aD?&Pf|!0l7)I/2_Cw>", 10); // safe: true
+```
+
+```
+var safe = strongpassword.issafe("8aD?&Pf|!0l7)I/2_Cw>", 25); // safe: false
 ```
 
 ## License

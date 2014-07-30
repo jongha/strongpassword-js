@@ -1,15 +1,18 @@
 var strongpassword = {
-    getpasswords: function(size) {
+    VALIDATIONS: [
+        "abcdefghijklmnopqrstuvwxyz",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "0123456789",
+        "`!?$?%^&*()_-+={[}]:;@'~#|\\<>.?/];"
+    ],
+    
+    // generate safe password
+    // size: generated password size
+    get: function(size) {
         size = size || 15;
         
         var MAX_SEED = 100;
-        var i, result = [], visit = [], map = [
-            "abcdefghijklmnopqrstuvwxyz",
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-            "0123456789",
-            "`!?$?%^&*()_-+={[",
-            "}]:;@'~#|\\<>.?/];"
-            ];
+        var i, result = [], visit = [], map = this.VALIDATIONS.slice(0);
     
         while(size-- > 0) {
             if(visit.length === 0) {
@@ -28,7 +31,32 @@ var strongpassword = {
             map[map_index] = map[map_index].replace(code, "");
             visit = visit.slice(0, idx).concat(visit.slice(idx + 1, visit.length));
         }
-    
         return result.join("");
+    },
+    
+    // validate password is safe
+    // password: password for valication
+    // threshold: min-length for safe password (default: 10)
+    issafe: function(password, threshold) {
+        threshold = threshold || 10;
+        
+        var check = false, i, j, k;
+        if(password.length >= threshold) {
+            for(i=0; i<this.VALIDATIONS.length; ++i) {
+                for(j=0; j<this.VALIDATIONS[i].length; ++j) {
+                    
+                    for(k=0; k<password.length; ++k) {
+                        check = (this.VALIDATIONS[i][j] === password[k]);
+                        if(check) { break; }
+                    }
+        
+                    if(check) { break; }
+                }
+                
+                if(!check) { break; }
+            }
+        }
+        
+        return check;
     }
 };
