@@ -6,7 +6,7 @@ var strongpassword = {
         "`!?$?%^&*()_-+={[}]:;@'~#|\\<>.?/];"
     ],
     
-    // generate safe password
+    // generate strong password
     // size: generated password size
     get: function(size) {
         size = size || 15;
@@ -34,11 +34,11 @@ var strongpassword = {
         return result.join("");
     },
     
-    // validate password is safe
+    // validate password is strong
     // password: password for valication
-    // threshold: min-length for safe password (default: 10)
-    issafe: function(password, threshold) {
-        threshold = threshold || 10;
+    // threshold: min-length for strong password (default: 10)
+    isstrong: function(password, threshold) {
+        threshold = threshold || 15;
         
         var check = false, i, j, k;
         if(password.length >= threshold) {

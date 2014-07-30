@@ -12,8 +12,8 @@
             equal(password2.length, size, "Default length " + size + " check");
             notEqual(password1, password2, "Previous passwords check");
             
-            equal(strongpassword.issafe(password1, size), true, "Password validation check");
-            equal(strongpassword.issafe(password2, size), true, "Password validation check");
+            equal(strongpassword.isstrong(password1, size), true, "Password validation check");
+            equal(strongpassword.isstrong(password2, size), true, "Password validation check");
         });
     };
     
