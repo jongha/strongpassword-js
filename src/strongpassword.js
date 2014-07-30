@@ -34,20 +34,20 @@ var strongpassword = {
         return result.join("");
     },
     
-    // validate password is strong
-    // password: password for valication
-    // threshold: min-length for strong password (default: 10)
-    isstrong: function(password, threshold) {
+    // get strong point
+    // 0: week
+    // VALIDATIONS.length: strong
+    point: function(password, threshold) {
         threshold = threshold || 15;
         
-        var check = false, i, j, k;
+        var check = false, i, j, k, point = 0;
         if(password.length >= threshold) {
             for(i=0; i<this.VALIDATIONS.length; ++i) {
                 for(j=0; j<this.VALIDATIONS[i].length; ++j) {
                     
                     for(k=0; k<password.length; ++k) {
                         check = (this.VALIDATIONS[i][j] === password[k]);
-                        if(check) { break; }
+                        if(check) { ++point; break; }
                     }
         
                     if(check) { break; }
@@ -57,6 +57,13 @@ var strongpassword = {
             }
         }
         
-        return check;
+        return point;
+    },
+    
+    // validate password is strong
+    // password: password for valication
+    // threshold: min-length for strong password (default: 10)
+    isstrong: function(password, threshold) {
+        return this.point(password, threshold) === this.VALIDATIONS.length;
     }
 };

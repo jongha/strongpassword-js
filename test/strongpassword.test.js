@@ -14,6 +14,10 @@
             
             equal(strongpassword.isstrong(password1, size), true, "Password validation check");
             equal(strongpassword.isstrong(password2, size), true, "Password validation check");
+            
+            var l = strongpassword.VALIDATIONS.length;
+            equal(strongpassword.point(password1, size), l, "Password validation point check");
+            equal(strongpassword.point(password2, size), l, "Password validation point check");            
         });
     };
     
