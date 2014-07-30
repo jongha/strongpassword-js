@@ -1,9 +1,9 @@
 var strongpassword = {
     VALIDATIONS: [
-        "abcdefghijklmnopqrstuvwxyz",
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "0123456789",
-        "`!?$?%^&*()_-+={[}]:;@'~#|\\<>.?/];"
+        "abcdefghijklmnopqrstuvwxyz", // lower chars
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ", // upper chars
+        "0123456789", // number
+        "`!?$?%^&*()_-+={[}]:;@'~#|\\<>.?/];" //special chars
     ],
     
     // generate strong password
@@ -37,33 +37,39 @@ var strongpassword = {
     // get strong point
     // 0: week
     // VALIDATIONS.length: strong
-    point: function(password, threshold) {
-        threshold = threshold || 15;
+    // customlist: Custom validation list.
+    point: function(password, customlist) {
+        var i, j, k, points = [], vlist = customlist || this.VALIDATIONS;
         
-        var check = false, i, j, k, point = 0;
-        if(password.length >= threshold) {
-            for(i=0; i<this.VALIDATIONS.length; ++i) {
-                for(j=0; j<this.VALIDATIONS[i].length; ++j) {
-                    
-                    for(k=0; k<password.length; ++k) {
-                        check = (this.VALIDATIONS[i][j] === password[k]);
-                        if(check) { ++point; break; }
-                    }
-        
-                    if(check) { break; }
-                }
+        for(i=0; i<vlist.length; ++i) {
+            points.push(false);
+            
+            for(j=0; j<vlist[i].length; ++j) {
                 
-                if(!check) { break; }
+                for(k=0; k<password.length; ++k) {
+                    if(points[i]) { break; }
+                    points[i] = (vlist[i][j] === password[k]);
+                }
             }
         }
         
-        return point;
+        var sum = 0;
+        for(i=0; i<vlist.length; ++i) {
+            sum += points[i] ? 1 : 0;
+        }
+        
+        return sum;
     },
     
     // validate password is strong
     // password: password for valication
     // threshold: min-length for strong password (default: 10)
     isstrong: function(password, threshold) {
-        return this.point(password, threshold) === this.VALIDATIONS.length;
+        threshold = threshold || 15;
+        if(password.length >= threshold) {
+            return this.point(password) === this.VALIDATIONS.length;
+        }
+        
+        return false;
     }
 };
