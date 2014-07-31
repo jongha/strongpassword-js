@@ -34,28 +34,28 @@ var strongpassword = {
         return result.join("");
     },
     
-    // get strong point
+    // get strong score
     // 0: week
     // VALIDATIONS.length: strong
     // customlist: Custom validation list.
-    point: function(password, customlist) {
-        var i, j, k, points = [], vlist = customlist || this.VALIDATIONS;
+    score: function(password, customlist) {
+        var i, j, k, scores = [], vlist = customlist || this.VALIDATIONS;
         
         for(i=0; i<vlist.length; ++i) {
-            points.push(false);
+            scores.push(false);
             
             for(j=0; j<vlist[i].length; ++j) {
                 
                 for(k=0; k<password.length; ++k) {
-                    if(points[i]) { break; }
-                    points[i] = (vlist[i][j] === password[k]);
+                    if(scores[i]) { break; }
+                    scores[i] = (vlist[i][j] === password[k]);
                 }
             }
         }
         
         var sum = 0;
         for(i=0; i<vlist.length; ++i) {
-            sum += points[i] ? 1 : 0;
+            sum += scores[i] ? 1 : 0;
         }
         
         return sum;
@@ -67,7 +67,7 @@ var strongpassword = {
     isstrong: function(password, threshold) {
         threshold = threshold || 15;
         if(password.length >= threshold) {
-            return this.point(password) === this.VALIDATIONS.length;
+            return this.score(password) === this.VALIDATIONS.length;
         }
         
         return false;
