@@ -48,14 +48,14 @@ var strongpassword = {
                 
                 for(k=0; k<password.length; ++k) {
                     if(scores[i]) { break; }
-                    scores[i] = (vlist[i][j] === password[k]);
+                    scores[i] = (vlist[i].charAt(j) === password.charAt(k));
                 }
             }
         }
         
         var sum = 0;
         for(i=0; i<vlist.length; ++i) {
-            sum += scores[i] ? 1 : 0;
+            sum += (scores[i] ? 1 : 0);
         }
         
         return sum;
